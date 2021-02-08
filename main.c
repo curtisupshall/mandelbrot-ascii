@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <math.h>
+#include <unistd.h>
 
-#define WIDTH 50
-#define HEIGHT 50
-#define LIMIT 10
+#define RES 60
 
 struct Complex {
     double r;
@@ -44,22 +43,6 @@ struct Complex f_z (struct Complex z, struct Complex c) {
     return z_nminus1;
 }
 
-int isStableRecursive (struct Complex c, struct Complex zn, int limit) {
-    if (limit == 0) {
-        return zn.r + 2 > c.r || zn.i +2 > c.i || zn.r - 2 < c.r || zn.i - 2 < c.i
-            ? 1
-            : 0;
-    }
-
-    return isStableRecursive(c, f_z(zn, c), limit - 1);
-}
-
-int isStable (struct Complex c) {
-    struct Complex origin = { .r = 0, .i = 0 };
-    
-    return isStableRecursive(c, f_z(origin, c), LIMIT);
-}
-
 double distance (struct Complex z1, struct Complex z2) {
     double dist = sqrt(pow(z1.r - z2.r, 2) + pow(z1.i - z2.i, 2));
     /*
@@ -78,7 +61,7 @@ double distance (struct Complex z1, struct Complex z2) {
  * @param c The complex constant
  * @param threshold The threshold where, if the distance between f(c) and the origin is less than this, f(c) is considered stable
  */
-double stability (int iteration, struct Complex z, struct Complex c, double threshold) {
+double calculateStability (int iteration, struct Complex z, struct Complex c, double threshold) {
     // Check if c is stable.
 
     /*
@@ -101,46 +84,69 @@ double stability (int iteration, struct Complex z, struct Complex c, double thre
         printZ(zn);
         printf("\n");
         */
-        return stability(iteration + 1, zn, c, threshold);
+        return calculateStability(iteration + 1, zn, c, threshold);
     }
 }
 
 int main () {
     struct Complex c;
-    int scaleX = 4;
-    int div = WIDTH / scaleX;
-    double s;
+    double stability;
+    
+    double scale = 1;
+    double pScale = 1;
+    double re = -2.0;
+    double pRe = -2.0;
+    double im = 1;
+    double pIm = 1;
 
+    int height = RES * 2/3;
+    int width =  RES * 2;
+    int n = 0;
 
-    for (int y = 0; y < HEIGHT; y ++) {
-        for (int x = 0; x < WIDTH; x ++) {
-            c.r = (double)(- scaleX / 2) + (double)x * (double)scaleX / WIDTH;
-            c.i = (double)(scaleX / 2) - (double)y * (double)scaleX / HEIGHT;
-            /*
-            printZ(c);
+    for (;;) {
+        for (int j = 0; j < height; j ++) {
+            for (int k = 0; k < width; k ++) {
+                c.r = re + (double)k * scale * (double)3 / (RES * 9/4);
+                c.i = im - (double)j * scale * (double)3 / RES;
+                /*
+                printZ(c);
+                printf("\n");
+                */
+                stability = calculateStability(1, f_z(origin, c), c, 0.1);
+                // printf("Stability: %.3f\n", s);
+
+                char shade = stability > 0 ? '%' : '.';
+                printf("%c", shade);
+                
+            }
             printf("\n");
-            */
-            s = stability(1, f_z(origin, c), c, 0.1);
-            // printf("Stability: %.3f\n", s);
-
-            char shade = s > 0 ? '%' : '.';
-            printf("%c", shade);
-            
         }
+        scanf("%d", &n);
         printf("\n");
+        
+        if (n <= 0) {
+            scale = pScale;
+            re = pRe;
+            im = pIm;
+        } else {
+            pScale = scale;
+            scale = scale / 2;
+            pIm = im;
+            pRe = re;
+
+            if (n >= 7) {
+                re += scale * (n - 7);
+            } else if (n >= 4) {
+                im -= scale;
+                re += scale * (n - 4);
+            } else if (n >= 1) {
+                im -= scale * 2;
+                re += scale * (n - 1);
+            }
+        }
+        
+       // printf("n = %d", n);
     }
 
-    double r;
-    double i;
-
-        c.r = -0.16;
-        c.i = 0.8;
-        printZ(c);
-        printf("\n");
-        s = stability(1, origin, c, 0.05);
-        printf("Stability: %.6f\n", s);
-
-
-    
     return 0;
 }
