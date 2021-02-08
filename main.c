@@ -1,110 +1,35 @@
 #include <stdio.h>
 #include <math.h>
 #include <unistd.h>
-
-#define RES 60
-
-struct Complex {
-    double r;
-    double i;
-};
-
-struct Complex origin = { .r = 0.0, .i = 0.0};
-
-struct Complex square (struct Complex z) {
-    struct Complex zSquared = {
-        .r = (z.r * z.r) - (z.i * z.i),
-        .i = 2 * z.r * z.i
-    };
-
-    return zSquared;
-}
-
-struct Complex add (struct Complex z1, struct Complex z2) {
-    struct Complex sum = {
-        .r = z1.r + z2.r,
-        .i = z1.i + z2.i
-    };
-    return sum;
-}
-
-struct Complex f_z (struct Complex z, struct Complex c) {
-    struct Complex z_nminus1 = add(square(z), c);
-    return z_nminus1;
-}
-
-double distance (struct Complex z1, struct Complex z2) {
-    return sqrt(pow(z1.r - z2.r, 2) + pow(z1.i - z2.i, 2));
-}
-
-double calculateStability (int iteration, struct Complex z, struct Complex c, double threshold) {
-    if (distance(z, origin) > 2) {
-        return 0;
-    }
-    struct Complex zn =  f_z(z, c);
-    if (distance(z, zn) < threshold || iteration > 200) {
-        return (double)1 / iteration;
-    } else {
-        return calculateStability(iteration + 1, zn, c, threshold);
-    }
-}
-
-int main () {
-    struct Complex c;
-    double stability;
-    
-    double scale = 1;
-    double pScale = 1;
-    double re = -2.0;
-
-    double pRe = -2.0;
-    double im = 1;
-    double pIm = 1;
-
-    int height = RES * 2/3;
-    int width =  RES * 2;
-    int n = 0;
-
-    for (;;) {
-        for (int j = 0; j < height; j ++) {
-            for (int k = 0; k < width; k ++) {
-                c.r = re + (double)k * scale * (double)3 / (RES * 9/4);
-                c.i = im - (double)j * scale * (double)3 / RES;
-
-                stability = calculateStability(1, f_z(origin, c), c, 0.1);
-
-                char shade = stability > 0 ? '%' : ' ';
-                printf("%c", shade);
-                
-            }
-            printf("\n");
-        }
-        scanf("%d", &n);
-        printf("\n");
-        
-        if (n < 0)
-            return 0;
-        else if (n == 0) {
-            scale = pScale;
-            re = pRe;
-            im = pIm;
-        } else {
-            pScale = scale;
-            scale = scale / 2;
-            pIm = im;
-            pRe = re;
-
-            if (n >= 7) {
-                re += scale * (n - 7);
-            } else if (n >= 4) {
-                im -= scale;
-                re += scale * (n - 4);
-            } else if (n >= 1) {
-                im -= scale * 2;
-                re += scale * (n - 1);
-            }
-        }
-    }
-
-    return 0;
-}
+#define R 60
+                                                                        //
+                                                                    struct C
+                                                                    {double r ;
+                                                                     double i
+                                                                      ;}; ///
+                                                       /**    */struct C o={.r=0.0,.i    //
+                                                       =0.0};struct C sq(struct C z){// ////
+                                                        struct C m={.r=(z.r*z.r)-(z.i*z.i),.
+                                                    i=2*z.r*z.i};return m;}struct C ad(////
+                                                   struct C a,struct C b){struct C s={.r=a.r+
+                                                  b.r,.i=a.i+b.i};return s;}struct C f(struct
+                            C   z  /** *        */,struct C c){struct C m=ad(sq(z),c);return m;
+                            }double d(/**      */struct C a,struct C b){return sqrt(pow(a.r-b.
+                          r,2)+pow(a.i-b.i,2  ));}double st(int i,struct C z,struct C c,double
+                         t){if(d(z,o)>2){/*** */return 0;}struct C m=f(z,c);if(d(z,m)<t||i>//
+                    200 ){return(double)1/i;}return st(i+1,m,c,t);}int main(){struct C c;///
+/**********************/double s;double sc=1;double ps=1;double r=-2.0;double pr=-2.0;double
+                    i=1 ;double pi=1;int h=R*2/3;int w=R*2;int n=0;for (;;){for(int j=0;j<h;j
+                        ++){for(int k=0;k<w;k++){c.r=r+(double)k*sc*(double)3/(R*9/4);c.i=i-//
+                          (double)j*sc*(/**   */double)3/R;s=st(1,f(o,c),c,0.1);char sh=s>0?'%'
+                             :' ';printf/*     */("%c",sh);}printf("\n");}scanf("%d", &n);////
+                                                printf("\n");if(n<0)return 0;else if(n==0){sc=
+                                                  ps;r=pr;i=pi;}else{ps=sc;sc=sc/2;pi=i;pr=r
+                                                   ;if(n>=7){r+=sc*(n-7);}else if(n>=4){i-=
+                                                     sc;r+=sc*(n-4);}else if(n>=1){i-=sc*2;
+                                                        r+=sc*(n-1);}}}return 0;}/*%%%%%%% &&&
+                                                       %%%   %%%%%%%%%%%%%%%%%%%%%%%%%%%%    %
+                                                                      %%% %%%
+                                                                    %%%%%%%%% %
+                                                                    %%%%%%%%%
+                                                                         */
