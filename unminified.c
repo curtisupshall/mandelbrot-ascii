@@ -1,3 +1,8 @@
+/**
+ * Written by Curtis Upshall
+ * With reference to Wikipedia: https://en.wikipedia.org/wiki/Mandelbrot_set
+ */
+
 #include <stdio.h>
 #include <math.h>
 

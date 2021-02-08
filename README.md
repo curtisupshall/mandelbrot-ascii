@@ -43,4 +43,9 @@ Simply clone the repo and run `make run`. The iamge is split into nine quadrants
 
 ![image info](./preview.png)
 
+## Original Source Code
 
+The original source code (before being minified) is created by me. I've included it in the repo as `unminified.c`!
+
+## References
+"Mandelbrot Set". Wikipedia. https://en.wikipedia.org/wiki/Mandelbrot_set
