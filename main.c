@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <math.h>
-#include <unistd.h>
 #define R 60
                                                                         //
                                                                     struct C
