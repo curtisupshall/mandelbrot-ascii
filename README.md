@@ -29,12 +29,13 @@ An interactive plot of the Mandelbrot Set drawn using ASCII in your terminal! Th
                                                    ;if(n>=7){r+=sc*(n-7);}else if(n>=4){i-=
                                                      sc;r+=sc*(n-4);}else if(n>=1){i-=sc*2;
                                                         r+=sc*(n-1);}}}return 0;}/*%%%%%%% &&&
-                                                       %%%   %%%%%%%%%%%%%%%%%%%%%%%%%%%%    %
+                                                       %%%   Made-by-Curtis-Upshall(2021)    %
                                                                       %%% %%%
                                                                     %%%%%%%%% %
                                                                     %%%%%%%%%
                                                                          */
 ```
+
 ## How to Use
 
 Simply clone the repo and run `make run`. The iamge is split into nine quadrants that can be zoomed in on, which correspond to the numbers on a keyboard's numberpad. Enter a number between 1 and 9 to zoom in, 0 to go back and -1 to exit the program.
@@ -48,4 +49,5 @@ Simply clone the repo and run `make run`. The iamge is split into nine quadrants
 The original source code (before being minified) is created by me. I've included it in the repo as `unminified.c`!
 
 ## References
+
 "Mandelbrot Set". Wikipedia. https://en.wikipedia.org/wiki/Mandelbrot_set

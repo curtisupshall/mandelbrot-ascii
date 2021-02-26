@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
-#define R 60
+#define R 60 // Resolution
+
                                                                         //
                                                                     struct C
                                                                     {double r ;
@@ -27,7 +28,7 @@
                                                    ;if(n>=7){r+=sc*(n-7);}else if(n>=4){i-=
                                                      sc;r+=sc*(n-4);}else if(n>=1){i-=sc*2;
                                                         r+=sc*(n-1);}}}return 0;}/*%%%%%%% &&&
-                                                       %%%   %%%%%%%%%%%%%%%%%%%%%%%%%%%%    %
+                                                       %%%   Made-by-Curtis-Upshall(2021)    %
                                                                       %%% %%%
                                                                     %%%%%%%%% %
                                                                     %%%%%%%%%
