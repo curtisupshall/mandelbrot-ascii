@@ -1,6 +1,10 @@
 # mandelbrot-ascii
 
-An interactive plot of the Mandelbrot Set drawn using ASCII in your terminal! The program is written in C and may look vaguely familiar.
+An interactive plot of the Mandelbrot Set drawn using ASCII in your terminal!
+
+![image info](./demo.gif)
+
+The program is written in C and may look vaguely familiar.
 
 ```c
                                                                         //
@@ -40,11 +44,7 @@ An interactive plot of the Mandelbrot Set drawn using ASCII in your terminal! Th
 
 Simply clone the repo and run `make run`. The iamge is split into nine quadrants that can be zoomed in on, which correspond to the numbers on a keyboard's numberpad. Enter a number between 1 and 9 to zoom in, 0 to go back and -1 to exit the program.
 
-## Program Output
-
-![image info](./preview.png)
-
-## Original Source Code
+## Un-minified Source Code
 
 The original source code (before being minified) is created by me. I've included it in the repo as `unminified.c`!
 
